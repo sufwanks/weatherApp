@@ -1,0 +1,27 @@
+button:hover{
+    margin-top: 10px;
+    
+    width: 105px;
+    height: 42px;
+}
+
+button{
+    margin-top: 9px;
+    color: rgb(246, 242, 248);
+    background-color: blueviolet;
+    width: 100px;
+    height: 40px;
+    border-radius: 30px;
+}
+#card{
+
+    border-radius: 20px;
+    padding: 6px;
+    
+}
+body{
+    background-image: url("https://images.pexels.com/photos/1118873/pexels-photo-1118873.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+}

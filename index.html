@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+    <div class="container"  >
+        <div class="row mt-5">
+
+            <div class="col-lg-4 col-md-6 col-sm-12"></div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+
+                <input type="text" id="search" placeholder="Enter city name" class="form-control">
+            <button onclick="findWeather()" >Search</button>
+
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12"></div>
+        </div>
+
+        <div class="row">
+            <img src="" alt="">
+            <div class="col-lg-4 col-md-6 col-sm-12"></div>
+            <div id="result" class="col-lg-4 col-md-6 col-sm-12">
+
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12"></div>
+        </div>
+
+    </div>
+    
+</body>
+<script>
+
+    function findWeather(){
+        let placeName=search.value;
+        let appId= "9fc44fcd4612d2d90987317ca01cf8c7";
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${placeName}&units=metric&appid=${appId}`)
+        .then(res=>res.json()).then(data=>populateValues(data))
+    }
+
+    function populateValues(weather){
+
+        // console.log(weather.weather[0].icon)
+        let icon=weather.weather[0].icon;
+        let placeName=weather.name;
+        let temprature=weather.main.temp;
+        let windSpeed=weather.wind.speed;
+        let weatherType=weather.weather[0].description;
+        let longitude=weather.coord.lon;
+        let lattitude=weather.coord.lat;
+
+        let htmlData=`
+        
+        <div class="card mt-5 shadow-sm p-3 mb-5 " style="width: 100%;" id="card">
+            <div class="card-header">
+                <img src="http://openweathermap.org/img/wn/${icon}@2x.png" alt="">
+                ${placeName}
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Temprature: ${temprature} °C</li>
+                <li class="list-group-item">Wind Speed: ${windSpeed} km/h</li>
+                <li class="list-group-item">longitude: ${longitude}</li>
+                <li class="list-group-item">lattitude: ${lattitude}</li>
+            </ul>
+        </div>
+                    
+        `
+       document.querySelector("#result").innerHTML=htmlData
+
+    }
+
+
+</script>
+</html>
